@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+
+  <div id="game">
+    <p id="directions-text">
+      press r, p, or s to start the game.
+    </p>
+
+    <p id="userchoice-text"></p>
+    <p id="computerchoice-text"></p>
+    <p id="wins-text"></p>
+    <p id="losses-text"></p>
+    <p id="ties-text"></p>
+
+
+  </div>
+
+  <script type="text/javascript">
+
+    var computerGuesses = ["r", "p", "s"];
+
+    var wins = 0;
+    var ties = 0;
+    var losses = 0;
+
+    var directionsText = document.getElementById("directions-text");
+    var userChoice = document.getElementById("userchoice-text");
+    var computerChoice = document.getElementById("computerchoice-text");
+    var winsText = document.getElementById("wins-text");
+    var lossesText = document.getElementById("losses-text");
+    var tiesText = document.getElementById("ties-text");
+
+    // Whenever a key is pressed, alert "pressed a button".
+    document.onkeyup = function (event) {
+
+      var userGuess = event.key
+      var computerGuess = computerGuesses[Math.floor(Math.random() * computerGuesses.length)];
+
+      console.log("user guess: " + userGuess);
+      console.log("computer guess: " + computerGuess);
+
+      if ((userGuess === "r") || (userGuess === "s") || (userGuess === "p")) {
+        if ((userGuess === "r" && computerGuess === "s") ||
+          (userGuess === "s" && computerGuess === "p") ||
+          (userGuess === "p" && computerGuess === "r")) {
+          console.log("yay I won");
+          wins++;
+
+        } else if (userGuess === computerGuess) {
+          console.log("what is this... soccer");
+          ties++;
+        } else {
+          console.log("dangit");
+          losses++;
+        }
+
+        directionsText.textContent = "";
+
+        userChoice.textContent = "You chose " + userGuess;
+
+        computerChoice.textContent = "The computer chose " + computerGuess;
+
+        winsText.textContent = "wins: " + wins;
+
+        lossesText.textContent = "losses: " + losses;
+
+        tiesText.textContent = "ties: " + ties;
+
+      }
+
+    };
+  </script>
+
+</body>
+
+</html>
